@@ -1,0 +1,11 @@
+{
+  "name": "claude-notes",
+  "owner": { "name": "adamedmunds" },
+  "plugins": [
+    {
+      "name": "notes",
+      "source": "./",
+      "description": "Search, read and write your local notes from Claude Code (needs the Notes server running)."
+    }
+  ]
+}

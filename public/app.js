@@ -4,6 +4,7 @@ const CATS = [
   { type: 'reference', label: 'Reference' },
   { type: 'feedback', label: 'How Claude should work' },
   { type: 'user', label: 'About you' },
+  { type: 'idea', label: 'Ideas' },
   { type: 'other', label: 'Other' },
 ];
 const EDITABLE_CATS = CATS.filter(c => c.type !== 'other');
@@ -144,7 +145,8 @@ function renderBlocks(blocks, vault) {
 // ---------- sidebar ----------
 function vaultsByRecent() {
   const latest = id => state.notes.filter(n => n.vault === id).map(n => n.modified).sort().pop() || '';
-  return [...state.vaults].sort((a, b) => latest(b.id).localeCompare(latest(a.id)));
+  // Shared always first, then projects by most recent change.
+  return [...state.vaults].sort((a, b) => (b.shared ? 1 : 0) - (a.shared ? 1 : 0) || latest(b.id).localeCompare(latest(a.id)));
 }
 function renderTree() {
   const route = parseRoute();
@@ -162,7 +164,7 @@ function renderTree() {
       </details>`;
     }).join('');
     return `<details class="group project" data-key="${esc(vKey)}"${isOpen(vKey, v.id === currentVault) ? ' open' : ''}>
-      <summary>${esc(v.label)}<span class="count">${notes.length}</span></summary>${cats}</details>`;
+      <summary>${esc(v.label)}<span class="count">${notes.length}</span></summary>${cats || `<p class="tree-empty">No notes yet. <a href="#/new/${encodeURIComponent(v.id)}">Write one</a></p>`}</details>`;
   }).join('') || '<p class="status">No notes yet. Use New note to write the first one.</p>';
   $('#tree').querySelectorAll('details').forEach(d => d.addEventListener('toggle', () => setOpen(d.dataset.key, d.open)));
   // "New note" starts in the project you're looking at.
@@ -238,7 +240,7 @@ function renderSide(n) {
   side.innerHTML = `
     <section><h2>Linked from</h2>${back.length ? `<ul>${back.map(b => `<li><a href="${noteHref(b)}" style="--cat:${catVar(b.type)}">${esc(titleOf(b))}</a></li>`).join('')}</ul>` : '<p class="empty">No other note links here.</p>'}</section>
     <section><h2>Links to</h2>${out.length ? `<ul>${out.map(item).join('')}</ul>` : '<p class="empty">This note has no links.</p>'}</section>
-    <section><h2>Details</h2><dl><dt>Project</dt><dd>${esc(vaultLabel(n.vault))}</dd><dt>File</dt><dd>${esc(n.file)}</dd><dt>Updated</dt><dd>${fmtDate(n.modified, true)}</dd></dl></section>`;
+    <section><h2>Details</h2><dl><dt>Project</dt><dd>${esc(vaultLabel(n.vault))}</dd>${n.author ? `<dt>Written by</dt><dd>${n.author === 'user' ? 'You' : esc(n.author)}</dd>` : ''}<dt>File</dt><dd>${esc(n.file)}</dd><dt>Updated</dt><dd>${fmtDate(n.modified, true)}</dd></dl></section>`;
 }
 
 function renderSearch(q) {
@@ -263,7 +265,7 @@ function renderSearch(q) {
 function renderEditor(n, presetVault) {
   state.editing = true; state.staleWhileEditing = false;
   const isNew = !n;
-  const vault = n ? n.vault : presetVault || (vaultsByRecent()[0] || {}).id;
+  const vault = n ? n.vault : presetVault || 'shared';
   $('#view').innerHTML = `<form class="editor" id="editor" novalidate>
     <h1>${isNew ? 'New note' : 'Edit note'}</h1>
     <div class="row">

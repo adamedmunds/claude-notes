@@ -16,6 +16,7 @@
   --c-reference: #e0b354;
   --c-feedback: #5fb3b3;
   --c-user: #7aa2f7;
+  --c-idea: #8bc48a;
   --c-other: #9a9a9a;
 
   --font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -282,3 +283,6 @@ input[type="search"]::placeholder { color: var(--faint); }
 .actions .btn-primary { padding: 8px 16px; }
 .actions .keys { font-size: 12.5px; }
 @media (max-width: 760px) { .editor .row { grid-template-columns: 1fr; } .actions .keys { display: none; } }
+.tree-empty { margin: 2px 0 8px 22px; font-size: 13px; color: var(--faint); }
+.tree-empty a { color: var(--accent); text-decoration: none; }
+.tree-empty a:hover { text-decoration: underline; }

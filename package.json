@@ -1,8 +1,8 @@
 {
   "name": "notes",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
-  "description": "Local Obsidian-style viewer and editor for Claude Code's memory notes (Windows, macOS, Linux)",
+  "description": "Local notes hub for you and your AI agents: website + MCP server (Windows, macOS, Linux)",
   "engines": {
     "node": ">=18"
   },

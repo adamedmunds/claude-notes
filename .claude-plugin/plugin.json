@@ -1,0 +1,6 @@
+{
+  "name": "notes",
+  "version": "1.2.0",
+  "description": "Your notes hub for Claude: search, read, write and capture ideas in the local Notes server (http://notes.localhost:6683). Bundles the MCP tools and skills for creating notes, looking things up, and ideas.",
+  "keywords": ["notes", "memory", "ideas", "mcp"]
+}
