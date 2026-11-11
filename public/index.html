@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Notes</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231e1e1e'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23a88bfa'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="panel sidebar" id="sidebar">
+      <div class="brand">
+        <a href="#/" class="brand-title">Notes</a>
+        <button class="btn menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="sidebar-body">Menu</button>
+      </div>
+      <div class="sidebar-body" id="sidebar-body">
+        <a class="btn btn-primary" id="nav-new" href="#/new">New note</a>
+        <label class="field">
+          <span class="sr-only">Search all notes</span>
+          <input id="search" type="search" placeholder="Search all notes" autocomplete="off">
+        </label>
+        <nav class="nav-actions">
+          <a class="btn" id="nav-home" href="#/">Recent</a>
+          <a class="btn" id="nav-graph" href="#/graph">Graph</a>
+        </nav>
+        <div id="tree" class="tree"></div>
+        <p class="status" id="status" role="status">Watching for changes</p>
+      </div>
+    </aside>
+
+    <main class="panel main" id="main" tabindex="-1">
+      <div id="view"></div>
+    </main>
+
+    <aside class="panel side" id="side" aria-label="Note details"></aside>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

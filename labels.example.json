@@ -1,0 +1,4 @@
+[
+  { "match": "-code-my-app$", "label": "My app" },
+  { "match": "-Documents-recipes$", "label": "Recipes" }
+]
