@@ -4,7 +4,7 @@
 const notes = require('./notes');
 
 const PROTOCOLS = ['2025-06-18', '2025-03-26', '2024-11-05'];
-const SERVER_INFO = { name: 'notes', title: 'Notes', version: '1.2.0' };
+const SERVER_INFO = { name: 'notes', title: 'Notes', version: require('./package.json').version };
 const INSTRUCTIONS = [
   "The user's personal notes hub, shared by every project and agent.",
   'Search before you create: if a note on the topic exists, add to it with append_to_note instead of making a duplicate.',
